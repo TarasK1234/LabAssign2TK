@@ -1,18 +1,30 @@
+import React from 'react';
+import { StyleSheet, View, FlatList, Text } from 'react-native';
+import ToDoForm from './ToDoForm.jsx';
+import ToDoList from './ToDoList.jsx';
 
-import React, { useState } from 'react';
-import { SafeAreaView } from 'react-native';
-import ToDoList from './ToDoList';
-import ToDoForm from './ToDoForm';
+export default function App() {
+  const [tasks, setTasks] = React.useState([]);
 
-function App() {
-  const [tasks, setTasks] = useState(['Do laundry', 'Go to gym', 'Walk dog']);
+  // Implementing addTask function
+  const addTask = (taskText) => {
+    if (taskText.trim()) { // Ensure no empty tasks are added
+      setTasks([...tasks, taskText]);
+    }
+  };
 
   return (
-    <SafeAreaView>
+    <View style={styles.container}>
+      <ToDoForm addTask={addTask} />
       <ToDoList tasks={tasks} />
-      <ToDoForm />
-    </SafeAreaView>
+    </View>
   );
 }
 
-export default App;
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    padding: 20,
+    backgroundColor: '#fff',
+  },
+});

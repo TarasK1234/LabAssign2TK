@@ -1,25 +1,25 @@
 import React from 'react';
-import { ScrollView, Pressable, View, Text, StyleSheet } from 'react-native';
+import { StyleSheet, FlatList, Text, View } from 'react-native';
 
-const ToDoList = ({ tasks }) => {
+function ToDoList({ tasks }) {
   return (
-    <ScrollView>
-      {tasks.map((task, index) => (
-        <Pressable key={index}>
-          <View style={styles.task}>
-            <Text style={styles.taskText}>{task}</Text>
-          </View>
-        </Pressable>
-      ))}
-    </ScrollView>
+    <FlatList
+      data={tasks}
+      keyExtractor={(item, index) => index.toString()}
+      renderItem={({ item }) => (
+        <View style={styles.taskItem}>
+          <Text style={styles.taskText}>{item}</Text>
+        </View>
+      )}
+    />
   );
-};
+}
 
 const styles = StyleSheet.create({
-  task: {
-    padding: 10,
+  taskItem: {
+    padding: 15,
     borderBottomWidth: 1,
-    borderColor: '#ccc',
+    borderBottomColor: '#ccc',
   },
   taskText: {
     fontSize: 16,
